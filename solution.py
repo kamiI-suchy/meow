@@ -36,7 +36,6 @@ class Vehicle:
         "Chrysler,USA",
         "Lincoln,USA",
         "GMC,USA",
-        "Chevrolet,USA",
         "Jeep,USA",
         "Land Rover,UK",
     ]
@@ -51,7 +50,6 @@ class Vehicle:
         ("Platinum Silver Metallic", "1J4", "#C3C1B9"),
         ("Sonic Titanium Metallic", "1J7", "#77726F"),
         ("Shimmering Silver", "1LO", "#808080"),
-        ("Cement Gray Metallic", "1H5", "#807E7A"),
         ("Eclipse Black", "209", "#0A1A10"),
         ("Matador Red Tricoat", "3R1", "#7C1010"),
         ("Red Pearl", "3T3", "#9B2825"),
@@ -74,15 +72,9 @@ class Vehicle:
     ]
 
     _id_counter = 0
-    _brands_map = {}
-
-    for entry in Brands:
-        brand_name, brand_country = [part.strip() for part in entry.split(",", 1)]
-        _brands_map[brand_name] = brand_country
-
     def __init__(self, brand, color, vin=""):
         self.brand = brand
-        self.country = self._brands_map.get(brand)
+        self.country = self._get_country_by_brand(brand)
         self.id = 0
         self.vin = ""
         self.color = None
@@ -106,6 +98,14 @@ class Vehicle:
             for entry in Vehicle.Brands
             if entry.split(",", 1)[1].strip().lower() == country_normalized
         ]
+
+    @staticmethod
+    def _get_country_by_brand(brand):
+        for entry in Vehicle.Brands:
+            brand_name, brand_country = [part.strip() for part in entry.split(",", 1)]
+            if brand_name == brand:
+                return brand_country
+        return None
 
     def setColor(self, color):
         if color is None:
@@ -154,7 +154,7 @@ class Vehicle:
             details.append(f"{name} ({code})")
 
         avg = self.fuelConsumption()
-        details.append(f"{avg:.2f} [l/km]" if avg is not None else "-")
+        details.append(f"{avg:.2f} [l/100km]" if avg is not None else "-")
 
         return ", ".join(details)
 
