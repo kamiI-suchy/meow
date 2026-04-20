@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Ćwiczenia z podstaw programowania w Pythonie (5)</title>
+<link rel="stylesheet" type="text/css" media="all" href="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/jquery-ui.css">
+<link rel="stylesheet" type="text/css" media="all" href="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/styles.css">
+<link rel="stylesheet" type="text/css" media="all" href="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/highlight.min.css">
+<script type="text/javascript" src="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/jquery.js"></script>
+<script type="text/javascript" src="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/jquery-ui.js"></script>
+<script type="text/javascript" src="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/main.js"></script>
+<script type="text/javascript" src="%C4%86wiczenia%20z%20podstaw%20programowania%20w%20Pythonie%20(5)_files/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style>
+	table.balls td { text-align: center; vertical-align: middle; }
+</style>
+</head>
+<body>
+<h1>Ćwiczenia z podstaw programowania w Pythonie (5)</h1>
+<h3 style="margin: 0 auto; text-align: center;">Klasy i obiekty (2)</h3>
+
+
+<h2 id="h2_1">Ćwiczenie 1</h2>
+<p>
+Ćwiczenie polega na utworzeniu klasy o nazwie <i><b>Vehicle</b></i> reprezentującej pojazdy, zawierającej odpowiednie właściwości oraz metody spełniające poniższe wymagania:
+</p><ul>
+	<li><b>Brands</b> (zmienna statyczna) - zmienna przechowująca dozwolone
+ marki samochodów w formacie &lt;Marka&gt;,&lt;Kraj&gt; z poniższego 
+zestawu:
+		<pre><code class="Python hljs">Alfa Romeo,Italy
+Audi,Germany
+BMW,Germany
+Chevrolet,USA
+Dodge,USA
+Ferrari,Italy
+Honda,Japan
+Jaguar,UK
+Lamborghini,Italy
+Mazda,Japan
+McLaren,UK
+Mercedes-Benz,Germany
+Nissan,Japan
+Porsche,Germany
+Fiat,Italy
+Mini,Germany
+Subaru,Japan
+Bentley,UK
+Buick,USA
+Ford,USA
+Hyundai,South Korea
+Lexus,Japan
+Maserati,Italy
+Roush,USA
+Volkswagen,Germany
+Acura,Japan
+Cadillac,USA
+Infiniti,Hong Kong
+Kia,South Korea
+Mitsubishi,Japan
+Rolls-Royce,UK
+Toyota,Japan
+Volvo,Sweden
+Chrysler,USA
+Lincoln,USA
+GMC,USA
+Chevrolet,USA
+Jeep,USA
+Land Rover,UK
+</code></pre>
+	</li>
+
+	<li><b>Colors</b> (zmienna statyczna) - lista dozwolonych kolorów w formacie &lt;name&gt; - &lt;od lakieru&gt; - &lt;hex&gt;, gdzie <b>name</b> to nazwa koloru, <b>code</b> to kod lakieru, <b>hex</b> to kod hex koloru:
+		<pre><code class="Python hljs">Pure White - <span class="hljs-number">40</span> - <span class="hljs-comment">#FDFDF7</span>
+Silver Metallic - <span class="hljs-number">1</span>F7 - <span class="hljs-comment">#D7D7CB</span>
+Magnetic Gray Metallic - <span class="hljs-number">1</span>G3 - <span class="hljs-comment">#7E7A7A</span>
+Cement Gray Metallic - <span class="hljs-number">1</span>H5 - <span class="hljs-comment">#807E7A</span>
+Mercury Gray Metallic - <span class="hljs-number">1</span>H9 - <span class="hljs-comment">#48433A</span>
+Sonic Silver Metallic - <span class="hljs-number">1J</span>2 - <span class="hljs-comment">#F4F4F2</span>
+Platinum Silver Metallic - <span class="hljs-number">1J</span>4 - <span class="hljs-comment">#C3C1B9</span>
+Sonic Titanium Metallic - <span class="hljs-number">1J</span>7 - <span class="hljs-comment">#77726F</span>
+Shimmering Silver - <span class="hljs-number">1L</span>O - <span class="hljs-comment">#808080</span>
+Cement Gray Metallic - <span class="hljs-number">1</span>H5 - <span class="hljs-comment">#807E7A</span>
+Eclipse Black - <span class="hljs-number">209</span> - <span class="hljs-comment">#0A1A10</span>
+Matador Red Tricoat - <span class="hljs-number">3</span>R1 - <span class="hljs-comment">#7C1010</span>
+Red Pearl - <span class="hljs-number">3</span>T3 - <span class="hljs-comment">#9B2825</span>
+Imperial Red - <span class="hljs-number">3</span>U5 - <span class="hljs-comment">#F31515</span>
+Amber Pearl - <span class="hljs-number">4</span>X2 - <span class="hljs-comment">#80391A</span>
+Oxide Bronze - <span class="hljs-number">6</span>X1 - <span class="hljs-comment">#C27842</span>
+Dark Blue Metallic - <span class="hljs-number">8</span>W7 - <span class="hljs-comment">#351FA7</span>
+Blue Pearl Tricoat - <span class="hljs-number">8</span>X1 - <span class="hljs-comment">#23128C</span>
+Medium Blue Tricoat - <span class="hljs-number">8</span>X2 - <span class="hljs-comment">#597DF3</span>
+Deep Blue Pearl - <span class="hljs-number">8</span>X5 - <span class="hljs-comment">#281F4F</span>
+Light Topaz Metallic - <span class="hljs-number">40</span> - <span class="hljs-comment">#E2C496</span>
+Blizzard Pearl Tricoat - <span class="hljs-number">70</span> - <span class="hljs-comment">#F4F1DE</span>
+White Nova GF Pearl Tricoat - <span class="hljs-number">83</span> - <span class="hljs-comment">#F9F9F1</span>
+Sonic Quartz Tricoat - <span class="hljs-number">85</span> - <span class="hljs-comment">#E7E1D3</span>
+Platinum Pearl White - <span class="hljs-number">89</span> - <span class="hljs-comment">#FFFFFF</span>
+Black - <span class="hljs-number">212</span> - <span class="hljs-comment">#0E0E0E</span>
+Attitude Black Pearl - <span class="hljs-number">218</span> - <span class="hljs-comment">#0E0E0E</span>
+Graphite Black Gf Effect - <span class="hljs-number">223</span> - <span class="hljs-comment">#2F2919</span>
+Gloss Trim Black - <span class="hljs-number">39063</span> - <span class="hljs-comment">#463838</span>
+</code></pre>
+	</li>
+
+	<li><b>id</b> - unikalny, kolejny numer przypisany do pojazdu nadawany automatycznie podczas tworzenia obiektu</li>
+
+	<li><b>vin</b> - numer VIN pojazdu (17 znaków)</li>
+
+	<li><b>getBrands</b> - metoda statyczna z parametrem <b>country</b> zwracająca listę marek pojazdów produkowanych w danym kraju (parametr <i>country</i>), wartość pusta argumentu <i>country</i> powinna zwrócić całą listę</li>
+
+	<li><b>setColor</b> - metoda z parametrem <b>color</b>, która ustawia wartość koloru (color) pojazdu na podstawie jednej z trzech wartości z powyższej listy</li>
+
+	<li><b>setVIN</b> - metoda z parametrem <b>vin</b>, która ustawia wartość numeru VIN pojazdu</li>
+	
+	<li><b>addFuel</b> - metoda z parametrami <b>odometer</b> oraz <b>fuel</b>, która dodaje do listy kolejne tankowania pojazdu, gdzie <i>odometer</i> to aktualny stan licznika w kilometrach, a <i>fuel</i> to ilość zatankowanego paliwa w litrach</li>
+
+	<li><b>fuelConsumption</b> - metoda, która wylicza średnie zużycie paliwa na 100 km dla danego pojazdu na podstawie wcześniej utworzonej listy metodą <i>addFuel</i></li>
+
+</ul>Dla prawidłowo utworzonej klasy <i><b>Vehicle</b></i> wykonanie poniższego kodu:
+<pre><code class="python hljs">vehicle_1 = Vehicle(<span class="hljs-string">"Volvo"</span>, <span class="hljs-string">"1J4"</span>, vin=<span class="hljs-string">"1234567890ABCDEFG"</span>)
+vehicle_1.addFuel(<span class="hljs-number">0</span>, <span class="hljs-number">20</span>)
+vehicle_1.addFuel(<span class="hljs-number">234.2</span>, <span class="hljs-number">40</span>)
+vehicle_1.addFuel(<span class="hljs-number">689.5</span>, <span class="hljs-number">30</span>)
+vehicle_1.addFuel(<span class="hljs-number">984.1</span>, <span class="hljs-number">30</span>)
+
+vehicle_2 = Vehicle(<span class="hljs-string">"Polonez"</span>, <span class="hljs-string">"Amber Pearl"</span>, vin=<span class="hljs-string">"ABCDEFG1234567890"</span>)
+
+vehicle_3 = Vehicle(<span class="hljs-string">"Kia"</span>, <span class="hljs-string">"8W7"</span>, vin=<span class="hljs-string">"WNFKEZ2390JK342CF"</span>)
+
+vehicle_4 = Vehicle(<span class="hljs-string">"Toyota"</span>, <span class="hljs-string">"Silver Metallic"</span>, vin=<span class="hljs-string">"ANCBDHKEIO2345BFK"</span>)
+vehicle_4.addFuel(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>)
+vehicle_4.addFuel(<span class="hljs-number">487.8</span>, <span class="hljs-number">40</span>)
+vehicle_4.addFuel(<span class="hljs-number">1029.2</span>, <span class="hljs-number">20</span>)
+
+print(vehicle_1)
+print(vehicle_2)
+print(vehicle_3)
+print(vehicle_4)
+</code></pre>
+
+powinno prowadzić do następującego rezultatu:
+<pre><code class="python hljs"><span class="hljs-number">1</span>: Volvo (Sweden), ...DEFG, Platinum Silver Metallic (<span class="hljs-number">1J</span>4), <span class="hljs-number">9.15</span> [l/km]
+<span class="hljs-number">0</span>: Polonez (N/A)
+<span class="hljs-number">2</span>: Kia (South Korea), ..<span class="hljs-number">.42</span>CF, Dark Blue Metallic (<span class="hljs-number">8</span>W7), -
+<span class="hljs-number">3</span>: Toyota (Japan), ..<span class="hljs-number">.5</span>BFK, Silver Metallic (<span class="hljs-number">1</span>F7), <span class="hljs-number">6.80</span> [l/km]
+</code></pre>
+
+<p></p>
+
+
+
+<div style="padding: 2em; color: #aaa; font-style: italic; font-size: 0.8em; text-align: right;">
+© 2023 Przemysław Włodarski<br>
+lab. s.308, KPSiIM WE ZUT
+</div>
+
+
+
+</body></html>
